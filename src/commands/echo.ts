@@ -4,7 +4,7 @@ import { APIApplicationCommand, APIInteractionResponse, ApplicationCommandOption
 import { IRequest, json } from 'itty-router'
 
 export const Echo: Partial<APIApplicationCommand> = {
-  name: 'Echo',
+  name: 'echo',
   description: 'Echo input message.',
   type: ApplicationCommandType.ChatInput,
   options: [
