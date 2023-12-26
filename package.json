@@ -1,0 +1,16 @@
+{
+  "name": "neko",
+  "license": "BSD-2-Clause",
+  "private": true,
+  "dependencies": {
+    "@neko03/with-interaction": "./lib/with-interaction",
+    "discord-api-types": "^0.37.66",
+    "discord-interactions": "^3.4.0",
+    "itty-router": "^4.0.23"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20231121.0",
+    "typescript": "^5.3.3",
+    "wrangler": "^3.22.1"
+  }
+}
