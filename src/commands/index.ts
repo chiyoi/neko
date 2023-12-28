@@ -19,5 +19,5 @@ export async function handleInteraction(request: IRequest & WithInteraction, env
 }
 
 export async function installCommands(request: IRequest, env: Env) {
-  return await bulkOverwriteGlobalApplicationCommands(env, [Echo, Chat])
+  return json(await bulkOverwriteGlobalApplicationCommands(env, [Echo, Chat]))
 }
