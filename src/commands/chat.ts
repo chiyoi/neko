@@ -28,10 +28,10 @@ export async function chat(request: IRequest & WithInteraction, env: Env, ctx: E
 
 async function followUp(request: IRequest & WithInteraction, env: Env) {
   const { interaction } = request
-  if (interaction.type !== discord.InteractionType.ApplicationCommand || interaction.data.type !== discord.ApplicationCommandType.ChatInput) return
-  if (interaction.data.options?.[0].type !== discord.ApplicationCommandOptionType.String || interaction.data.options?.[0].name !== 'message') return
-
   try {
+    if (interaction.type !== discord.InteractionType.ApplicationCommand || interaction.data.type !== discord.ApplicationCommandType.ChatInput) throw new Error(`Unexpected invalid interaction.`)
+    if (interaction.data.options?.[0].type !== discord.ApplicationCommandOptionType.String || interaction.data.options?.[0].name !== 'message') throw new Error(`Malformed options.`)
+
     let threadID = await (await env.neko.get(`channels/${interaction.channel.id}`))?.text()
     if (threadID === undefined) {
       const thread = await createThread(env, {})

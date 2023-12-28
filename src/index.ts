@@ -20,13 +20,14 @@ function router() {
   return router
 }
 
-export interface Env {
+export type Env = {
   DISCORD_APPLICATION_ID: string,
   DISCORD_APPLICATION_PUBLIC_KEY: string,
   DISCORD_APPLICATION_BOT_TOKEN: string,
-  ASSISTANT_ID: "asst_yEYxwYUPMBSbRPms5sYhw4js", // cspell: disable-line
+  ASSISTANT_ID: string,
   OPENAI_API_KEY: string,
   AUTH_SECRET: string,
+  GITHUBCARD_ENDPOINT: string,
 
   neko: R2Bucket,
 }
