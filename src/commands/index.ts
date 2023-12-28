@@ -1,11 +1,11 @@
-import { IRequest, json } from 'itty-router'
+import { IRequest, error, json } from 'itty-router'
 import { Echo, echo } from './echo'
 import { Env } from '@/src'
 import { WithInteraction, bulkOverwriteGlobalApplicationCommands } from '@neko03/with-interaction'
 import * as discord from 'discord-api-types/v10'
-import { Chat } from '@/src/commands/chat'
+import { Chat, chat } from '@/src/commands/chat'
 
-export async function handleInteraction(request: IRequest & WithInteraction, env: Env) {
+export async function handleInteraction(request: IRequest & WithInteraction, env: Env, ctx: ExecutionContext) {
   const { interaction } = request
   if (interaction.type === discord.InteractionType.Ping) {
     const response: discord.APIInteractionResponse = {
@@ -15,6 +15,10 @@ export async function handleInteraction(request: IRequest & WithInteraction, env
   }
   if (interaction.type === discord.InteractionType.ApplicationCommand) switch (interaction.data.name) {
   case 'echo': return echo(request, env)
+  case 'chat': return chat(request, env, ctx)
+  default:
+    console.error(`Unknown interaction type ${interaction.type}`)
+    return error(500)
   }
 }
 

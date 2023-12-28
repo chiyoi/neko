@@ -24,12 +24,7 @@ export function echo(request: IRequest & WithInteraction, env: Env) {
   const message = interaction.data.options[0].value
   const response: api.APIInteractionResponse = {
     type: api.InteractionResponseType.ChannelMessageWithSource,
-    data: {
-      content: message,
-    },
-  }
-  const r1: api.APIInteractionResponse = {
-    type: api.InteractionResponseType.UpdateMessage
+    data: { content: message },
   }
   return json(response)
 }

@@ -20,7 +20,9 @@ export const Chat: discord.RESTPostAPIApplicationCommandsJSONBody = {
 
 export async function chat(request: IRequest & WithInteraction, env: Env, ctx: ExecutionContext) {
   ctx.waitUntil(followUp(request, env))
-  const response: discord.APIInteractionResponse = { type: discord.InteractionResponseType.DeferredChannelMessageWithSource }
+  const response: discord.APIInteractionResponse = {
+    type: discord.InteractionResponseType.DeferredChannelMessageWithSource,
+  }
   return json(response)
 }
 
@@ -30,16 +32,11 @@ async function followUp(request: IRequest & WithInteraction, env: Env) {
   if (interaction.data.options?.[0].type !== discord.ApplicationCommandOptionType.String || interaction.data.options?.[0].name !== 'message') return
 
   try {
-    const channel = await getChannel(interaction.channel.id, env)
-    if (channel.type !== discord.ChannelType.GuildText) return
-    const category = await getChannel(channel.id, env)
-    if (category.type !== discord.ChannelType.GuildCategory || category.name.toLowerCase() !== 'chat with neko') return
-
-    let threadID = await (await env.neko.get(`channels/${channel.id}`))?.text()
+    let threadID = await (await env.neko.get(`channels/${interaction.channel.id}`))?.text()
     if (threadID === undefined) {
       const thread = await createThread(env, {})
       threadID = thread.id
-      await env.neko.put(`channels/${channel.id}`, threadID)
+      await env.neko.put(`channels/${interaction.channel.id}`, threadID)
     }
 
     await createMessage(threadID, env, {
