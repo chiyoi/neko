@@ -39,9 +39,11 @@ async function followUp(request: IRequest & WithInteraction, env: Env) {
       await env.neko.put(`channels/${interaction.channel.id}`, threadID)
     }
 
+    const message = interaction.data.options[0].value
+
     await createMessage(threadID, env, {
       role: 'user',
-      content: interaction.data.options[0].value
+      content: message,
     })
 
     let run = await createRun(threadID, env, { assistant_id: env.ASSISTANT_ID })
@@ -63,9 +65,8 @@ async function followUp(request: IRequest & WithInteraction, env: Env) {
       case 'completed':
         const pager = await listMessages(threadID, env, { limit: 1 })
         if (pager.data.length !== 1) throw new Error('Expect `pager.data.length === 1`.')
-        const message = pager.data[0]
-        const plaintext = message.content.reduce((plaintext, paragraph) => paragraph.type === 'text' ? plaintext + paragraph.text.value : plaintext, '')
-        await editOriginalInteractionResponse(interaction, env, { content: plaintext })
+        const plaintext = pager.data[0].content.reduce((plaintext, paragraph) => paragraph.type === 'text' ? plaintext + paragraph.text.value : plaintext, '')
+        await editOriginalInteractionResponse(interaction, env, { content: `[Prompt]${message}\n\n${plaintext}` })
         return
       }
       await new Promise(resolve => setTimeout(resolve, 1000))
