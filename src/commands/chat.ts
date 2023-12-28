@@ -64,7 +64,7 @@ async function followUp(request: IRequest & WithInteraction, env: Env) {
         const pager = await listMessages(threadID, env, { limit: 1 })
         if (pager.data.length !== 1) throw new Error('Expect `pager.data.length === 1`.')
         const message = pager.data[0]
-        const plaintext = message.content.reduce((plaintext, paragraph) => paragraph.type === 'text' ? plaintext + paragraph : plaintext, '')
+        const plaintext = message.content.reduce((plaintext, paragraph) => paragraph.type === 'text' ? plaintext + paragraph.text.value : plaintext, '')
         await editOriginalInteractionResponse(interaction, env, { content: plaintext })
         return
       }
