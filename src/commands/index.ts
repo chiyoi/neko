@@ -1,20 +1,23 @@
-import { IRequest } from 'itty-router'
+import { IRequest, json } from 'itty-router'
 import { Echo, echo } from './echo'
 import { Env } from '@/src'
-import { WithInteraction, installGlobalCommands } from '@neko03/with-interaction'
-import { InteractionType } from 'discord-api-types/v10'
+import { WithInteraction, bulkOverwriteGlobalApplicationCommands } from '@neko03/with-interaction'
+import * as discord from 'discord-api-types/v10'
+import { Chat } from '@/src/commands/chat'
 
-export async function handleCommand(request: IRequest & WithInteraction, env: Env) {
+export async function handleInteraction(request: IRequest & WithInteraction, env: Env) {
   const { interaction } = request
-  if (interaction.type === InteractionType.ApplicationCommand) switch (interaction.data.name) {
-  case 'echo': echo(request, env); break
+  if (interaction.type === discord.InteractionType.Ping) {
+    const response: discord.APIInteractionResponse = {
+      type: discord.InteractionResponseType.Pong
+    }
+    return json(response)
+  }
+  if (interaction.type === discord.InteractionType.ApplicationCommand) switch (interaction.data.name) {
+  case 'echo': return echo(request, env)
   }
 }
 
 export async function installCommands(request: IRequest, env: Env) {
-  const commands = [Echo]
-  console.debug('Ready to install.')
-  const response = await installGlobalCommands(commands, env)
-  console.debug('pass')
-  return response
+  return await bulkOverwriteGlobalApplicationCommands(env, [Echo, Chat])
 }

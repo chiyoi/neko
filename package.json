@@ -3,9 +3,9 @@
   "license": "BSD-2-Clause",
   "private": true,
   "dependencies": {
-    "@neko03/with-interaction": "file:lib/with-interaction",
+    "@neko03/with-interaction": "^0.1.5",
+    "@neko03/openai-requests": "^0.1.1",
     "discord-api-types": "^0.37.66",
-    "discord-interactions": "^3.4.0",
     "itty-router": "^4.0.23"
   },
   "devDependencies": {
