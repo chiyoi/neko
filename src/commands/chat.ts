@@ -19,24 +19,24 @@ export const Chat: discord.RESTPostAPIApplicationCommandsJSONBody = {
 }
 
 export async function chat(request: IRequest & WithInteraction, env: Env, ctx: ExecutionContext) {
-  ctx.waitUntil(followUp(request, env))
+  ctx.waitUntil(followup(request, env))
   const response: discord.APIInteractionResponse = {
     type: discord.InteractionResponseType.DeferredChannelMessageWithSource,
   }
   return json(response)
 }
 
-async function followUp(request: IRequest & WithInteraction, env: Env) {
+async function followup(request: IRequest & WithInteraction, env: Env) {
   const { interaction } = request
   try {
     if (interaction.type !== discord.InteractionType.ApplicationCommand || interaction.data.type !== discord.ApplicationCommandType.ChatInput) throw new Error(`Unexpected invalid interaction.`)
     if (interaction.data.options?.[0].type !== discord.ApplicationCommandOptionType.String || interaction.data.options?.[0].name !== 'message') throw new Error(`Malformed options.`)
 
-    let threadID = await (await env.neko.get(`channels/${interaction.channel.id}`))?.text()
+    let threadID = await (await env.neko.get(`chat/channel_thread/${interaction.channel.id}`))?.text()
     if (threadID === undefined) {
       const thread = await createThread(env, {})
       threadID = thread.id
-      await env.neko.put(`channels/${interaction.channel.id}`, threadID)
+      await env.neko.put(`chat/channel_thread/${interaction.channel.id}`, threadID)
     }
 
     const message = interaction.data.options[0].value
@@ -77,5 +77,7 @@ async function followUp(request: IRequest & WithInteraction, env: Env) {
     await editOriginalInteractionResponse(interaction, env, {
       content: '[Auto Reply]エラー発生。',
     })
+    await new Promise(resolve => setTimeout(resolve, 5000))
+    await deleteOriginalInteractionResponse(interaction, env)
   }
 }
