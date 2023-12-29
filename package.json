@@ -3,7 +3,7 @@
   "license": "BSD-2-Clause",
   "private": true,
   "dependencies": {
-    "@neko03/with-interaction": "^0.1.6",
+    "@neko03/with-interaction": "^0.1.7",
     "@neko03/openai-requests": "^0.1.1",
     "discord-api-types": "^0.37.66",
     "itty-router": "^4.0.23"

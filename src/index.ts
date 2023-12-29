@@ -2,6 +2,7 @@ import { withAuth } from '@/src/auth'
 import { handleInteraction, installCommands, } from '@/src/commands'
 import { withInteraction } from '@neko03/with-interaction'
 import { Router, error } from 'itty-router'
+import * as discord from 'discord-api-types/v10'
 
 export default {
   fetch: (request: Request, env: Env, ctx: ExecutionContext) => router()
@@ -28,6 +29,7 @@ export type Env = {
   OPENAI_API_KEY: string,
   AUTH_SECRET: string,
   GITHUBCARD_ENDPOINT: string,
+  QUICK_LATEX_ENDPOINT: string,
 
   neko: R2Bucket,
 }

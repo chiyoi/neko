@@ -5,6 +5,7 @@ import { WithInteraction, bulkOverwriteGlobalApplicationCommands } from '@neko03
 import * as discord from 'discord-api-types/v10'
 import { Chat, chat } from '@/src/commands/chat'
 import { Githubcard, githubcard } from '@/src/commands/githubcard'
+import { Latex, latex } from '@/src/commands/latex'
 
 export async function handleInteraction(request: IRequest & WithInteraction, env: Env, ctx: ExecutionContext) {
   const { interaction } = request
@@ -18,6 +19,7 @@ export async function handleInteraction(request: IRequest & WithInteraction, env
   case 'echo': return echo(request, env)
   case 'chat': return chat(request, env, ctx)
   case 'githubcard': return githubcard(request, env)
+  case 'Render LaTeX': return latex(request, env)
   default:
     console.error(`Unknown interaction type ${interaction.type}`)
     return error(500)
@@ -25,5 +27,5 @@ export async function handleInteraction(request: IRequest & WithInteraction, env
 }
 
 export async function installCommands(request: IRequest, env: Env) {
-  return json(await bulkOverwriteGlobalApplicationCommands(env, [Echo, Chat, Githubcard]))
+  return json(await bulkOverwriteGlobalApplicationCommands(env, [Echo, Chat, Githubcard, Latex]))
 }

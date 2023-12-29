@@ -200,10 +200,10 @@
     openai "^4.24.1"
     typescript "^5.3.3"
 
-"@neko03/with-interaction@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@neko03/with-interaction/-/with-interaction-0.1.6.tgz#86fb1fc55ea81e2050959b91db5faf05c2f73f6c"
-  integrity sha512-2Aj2UQ/1UFLOA8mhr0LOAyj1HGP23lN0lhRORkblcWaNa/HjBoVpTsqFk+qdKee0rtW19Q/WC0m8tuQHRL7X9Q==
+"@neko03/with-interaction@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@neko03/with-interaction/-/with-interaction-0.1.7.tgz#5543e8125946093a40042a041a23b5b6dbc06e6d"
+  integrity sha512-BPzfTRLQXk44ixNj0tTOMhluVN+sG9AfeDJEtDZKfL61xmRhKuWzMeqPS6DkMvGH6DJt03ATQibW7eDvy8sffw==
   dependencies:
     "@cloudflare/workers-types" "^4.20231121.0"
     discord-api-types "^0.37.66"

@@ -8,6 +8,7 @@ DISCORD_APPLICATION_ID = "1188775821863833641"
 DISCORD_APPLICATION_PUBLIC_KEY = "a33e1509bca2910c8ebde944a1ca886dcf11fc8e9051ee2dfdb41cc4ba731d89"
 ASSISTANT_ID = "asst_yEYxwYUPMBSbRPms5sYhw4js"
 GITHUBCARD_ENDPOINT = "https://opengraph.githubassets.com/githubcard"
+QUICK_LATEX_ENDPOINT = "https://quicklatex.com/latex3.f"
 # cspell: enable
 
 [[r2_buckets]]
