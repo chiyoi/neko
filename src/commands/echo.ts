@@ -17,7 +17,7 @@ export const Echo: discord.RESTPostAPIApplicationCommandsJSONBody = {
   ]
 }
 
-export function echo(request: IRequest & WithInteraction, env: Env) {
+export const echo = (request: IRequest & WithInteraction, env: Env) => {
   const { interaction } = request
   if (interaction.type !== discord.InteractionType.ApplicationCommand || interaction.data.type !== discord.ApplicationCommandType.ChatInput) return error(500)
   if (interaction.data.options?.[0].type !== discord.ApplicationCommandOptionType.String || interaction.data.options?.[0].name !== 'message') return error(400, 'Malformed options.')

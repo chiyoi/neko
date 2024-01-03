@@ -1,7 +1,7 @@
 import { Env } from '@/src'
 import { IRequest, error } from 'itty-router'
 
-export function withAuth(request: IRequest, env: Env) {
+export const withAuth = (request: IRequest, env: Env) => {
   const [scheme, token] = request.headers.get('Authorization')?.split(' ') ?? []
   if (scheme !== 'Secret') return error(401, 'Missing or malformed authorization token.')
   const encoder = new TextEncoder()

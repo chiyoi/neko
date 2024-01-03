@@ -17,7 +17,7 @@ export const Github: discord.RESTPostAPIApplicationCommandsJSONBody = {
   ]
 }
 
-export async function github(request: IRequest & WithInteraction, env: Env) {
+export const github = (request: IRequest & WithInteraction, env: Env) => {
   const { interaction } = request
   if (interaction.type !== discord.InteractionType.ApplicationCommand || interaction.data.type !== discord.ApplicationCommandType.ChatInput) return error(500, 'Unexpected command type mismatch.')
   if (interaction.data.options?.[0].type !== discord.ApplicationCommandOptionType.String || interaction.data.options?.[0].name !== 'repository') return error(400, 'Malformed options.')

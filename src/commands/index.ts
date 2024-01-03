@@ -7,7 +7,7 @@ import { Chat, chat } from '@/src/commands/chat'
 import { Github, github } from '@/src/commands/github'
 import { Latex, latex } from '@/src/commands/latex'
 
-export async function handleInteraction(request: IRequest & WithInteraction, env: Env, ctx: ExecutionContext) {
+export const handleInteraction = async (request: IRequest & WithInteraction, env: Env, ctx: ExecutionContext) => {
   const { interaction } = request
   if (interaction.type === discord.InteractionType.Ping) {
     const response: discord.APIInteractionResponse = {
@@ -30,6 +30,6 @@ export async function handleInteraction(request: IRequest & WithInteraction, env
   }
 }
 
-export async function installCommands(request: IRequest, env: Env) {
+export const installCommands = async (request: IRequest, env: Env) => {
   return json(await bulkOverwriteGlobalApplicationCommands(env, [Echo, Chat, Github, Latex]))
 }

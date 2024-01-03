@@ -8,7 +8,7 @@ export const Latex: discord.RESTPostAPIApplicationCommandsJSONBody = {
   type: discord.ApplicationCommandType.Message,
 }
 
-export async function latex(request: IRequest & WithInteraction, env: Env, ctx: ExecutionContext) {
+export const latex = async (request: IRequest & WithInteraction, env: Env, ctx: ExecutionContext) => {
   ctx.waitUntil(followup(request, env))
   const response: discord.APIInteractionResponse = {
     type: discord.InteractionResponseType.DeferredChannelMessageWithSource,
@@ -16,7 +16,7 @@ export async function latex(request: IRequest & WithInteraction, env: Env, ctx: 
   return json(response)
 }
 
-async function followup(request: IRequest & WithInteraction, env: Env) {
+const followup = async (request: IRequest & WithInteraction, env: Env) => {
   const { interaction } = request
   try {
     if (interaction.type !== discord.InteractionType.ApplicationCommand || interaction.data.type !== discord.ApplicationCommandType.Message) throw new Error(`Unexpected interaction type mismatch.`)

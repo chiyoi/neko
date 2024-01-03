@@ -18,7 +18,7 @@ export const Chat: discord.RESTPostAPIApplicationCommandsJSONBody = {
   ]
 }
 
-export async function chat(request: IRequest & WithInteraction, env: Env, ctx: ExecutionContext) {
+export const chat = async (request: IRequest & WithInteraction, env: Env, ctx: ExecutionContext) => {
   ctx.waitUntil(followup(request, env))
   const response: discord.APIInteractionResponse = {
     type: discord.InteractionResponseType.DeferredChannelMessageWithSource,
@@ -26,7 +26,7 @@ export async function chat(request: IRequest & WithInteraction, env: Env, ctx: E
   return json(response)
 }
 
-async function followup(request: IRequest & WithInteraction, env: Env) {
+const followup = async (request: IRequest & WithInteraction, env: Env) => {
   const { interaction } = request
   try {
     if (interaction.type !== discord.InteractionType.ApplicationCommand || interaction.data.type !== discord.ApplicationCommandType.ChatInput) throw new Error(`Unexpected invalid interaction.`)

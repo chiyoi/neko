@@ -9,7 +9,7 @@ export default {
     .catch(error),
 }
 
-function router() {
+const router = () => {
   const router = Router()
   router.all('/ping', () => new Response('Pong!\n'))
   router.get('/', () => Response.redirect('https://github.com/chiyoi/neko', 307))
