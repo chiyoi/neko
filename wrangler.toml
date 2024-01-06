@@ -1,6 +1,7 @@
 name = "neko"
 main = "src/index.ts"
 compatibility_date = "2023-11-21"
+workers_dev = true
 
 [vars]
 # cspell: disable
@@ -14,3 +15,7 @@ QUICK_LATEX_ENDPOINT = "https://quicklatex.com/latex3.f"
 [[r2_buckets]]
 binding = "neko"
 bucket_name = "neko"
+
+[[routes]]
+pattern = "neko.neko03.moe"
+custom_domain = true
