@@ -1,4 +1,4 @@
-import { Env } from '@/src'
+import { Env } from '@/app'
 import { cancelRun, createMessage, createRun, createThread, listMessages, retrieveRun } from '@neko03/openai-requests'
 import { WithInteraction, deleteOriginalInteractionResponse, editOriginalInteractionResponse, getChannel } from '@neko03/with-interaction'
 import * as discord from 'discord-api-types/v10'

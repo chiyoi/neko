@@ -1,4 +1,4 @@
-import { Env } from '@/src'
+import { Env } from '@/app'
 import { WithInteraction } from '@neko03/with-interaction'
 import * as discord from 'discord-api-types/v10'
 import { IRequest, error, json } from 'itty-router'

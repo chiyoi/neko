@@ -1,5 +1,5 @@
-import { withAuth } from '@/src/auth'
-import { handleInteraction, installCommands, } from '@/src/commands'
+import { withAuth } from '@/app/auth'
+import { handleInteraction, installCommands, } from '@/app/commands'
 import { withInteraction } from '@neko03/with-interaction'
 import { Router, error } from 'itty-router'
 

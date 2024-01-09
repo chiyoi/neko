@@ -1,4 +1,4 @@
-import { Env } from '@/src'
+import { Env } from '@/app'
 import { IRequest, error } from 'itty-router'
 
 export const withAuth = (request: IRequest, env: Env) => {

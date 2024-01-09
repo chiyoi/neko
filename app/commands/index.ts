@@ -1,11 +1,11 @@
 import { IRequest, error, json } from 'itty-router'
 import { Echo, echo } from './echo'
-import { Env } from '@/src'
+import { Env } from '@/app'
 import { WithInteraction, bulkOverwriteGlobalApplicationCommands } from '@neko03/with-interaction'
 import * as discord from 'discord-api-types/v10'
-import { Chat, chat } from '@/src/commands/chat'
-import { Github, github } from '@/src/commands/github'
-import { Latex, latex } from '@/src/commands/latex'
+import { Chat, chat } from '@/app/commands/chat'
+import { Github, github } from '@/app/commands/github'
+import { Latex, latex } from '@/app/commands/latex'
 
 export const handleInteraction = async (request: IRequest & WithInteraction, env: Env, ctx: ExecutionContext) => {
   const { interaction } = request
